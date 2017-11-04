@@ -33,7 +33,6 @@ func main() {
 	ak := flag.String("ak", "", "access key")
 	sk := flag.String("sk", "", "secret key")
 	flag.Parse()
-
 	if "" == *bucket {
 		log.Fatal("please specify bucket with -bucket")
 	}
@@ -53,38 +52,32 @@ func main() {
 	putPolicy := storage.PutPolicy{
 		Scope: fmt.Sprintf("%s:%s", *bucket, key), // overwrite if exists
 	}
-	mac := qbox.NewMac(*ak, *sk)
-	upToken := putPolicy.UploadToken(mac)
-	cfg := storage.Config{}
-	formUploader := storage.NewFormUploader(&cfg)
-	ret := storage.PutRet{}
-	dataLen := int64(len(data))
-	err := formUploader.Put(context.Background(), &ret, upToken, key, bytes.NewReader(data), dataLen, nil)
-	if nil != err {
+	formUploader := storage.NewFormUploader(nil)
+	if err := formUploader.Put(context.Background(), nil, putPolicy.UploadToken(qbox.NewMac(*ak, *sk)),
+		key, bytes.NewReader(data), int64(len(data)), nil); nil != err {
 		log.Fatal(err)
 	}
 
 	log.Println("process sucessfully, exit")
 }
 
-func picData(picURL string) []byte {
-	_, ret, errs := gorequest.New().Get(picURL).Timeout(15*time.Second).
+func picData(picURL string) (data []byte) {
+	var errs []error
+	if _, data, errs = gorequest.New().Get(picURL).Timeout(15*time.Second).
 		Retry(3, 5*time.Second, http.StatusBadRequest, http.StatusInternalServerError).
-		EndBytes()
-	if nil != errs {
+		EndBytes(); nil != errs {
 		log.Fatal("%s", errs[0])
 	}
 
-	return ret
+	return
 }
 
 func todayPicURL() string {
 	data := map[string]interface{}{}
-	_, _, errs := gorequest.New().Get("https://cn.bing.com/HPImageArchive.aspx?format=js&n=1").
+	if _, _, errs := gorequest.New().Get("https://cn.bing.com/HPImageArchive.aspx?format=js&n=1").
 		Timeout(15*time.Second).
 		Retry(3, 5*time.Second, http.StatusBadRequest, http.StatusInternalServerError).
-		EndStruct(&data)
-	if nil != errs {
+		EndStruct(&data); nil != errs {
 		log.Fatalf("%s", errs[0])
 	}
 
