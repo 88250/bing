@@ -20,3 +20,8 @@
 
 * 壁纸分辨率是 1920*1080，按每张大小 500K 计算一年大概需要 180M 存储空间
 * 可以直接访问我上传好的壁纸（并且带了 CDN）：`https://img.hacpai.com/bing/yyyyMMdd.jpg`，起始日期是 20171104，即 https://img.hacpai.com/bing/20171104.jpg
+
+## 鸣谢
+
+* 微软 Bing 搜索以及各图片作者
+* [GoRequest](https://github.com/parnurzeal/gorequest)：简单好用的 golang HTTP 客户端
