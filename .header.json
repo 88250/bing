@@ -1,0 +1,15 @@
+{
+    "Dir": ".",
+    "Template": "header.txt",
+    "Includes": [
+        "**.go"
+    ],
+    "Excludes": [
+        "vendor/**"
+    ],
+    "UseDefaultExcludes": true,
+    "Properties": {
+        "Year": "2017",
+        "Owner": "b3log.org"
+    }
+}
