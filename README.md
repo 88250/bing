@@ -4,7 +4,7 @@
 
 ## 动机
 
-* [Pipe](https://github.com/b3log/pipe) 博客平台有个特性是随机为文章配图，所以需要一些漂亮的图片
+* [Pipe](https://github.com/88250/pipe) 博客平台有个特性是随机为文章配图，所以需要一些漂亮的图片
 * Bing 壁纸原始地址会过期，为了尽量保证图片的可访问性，所以下载原图后上传到七牛云
 
 ## 使用方式
@@ -19,7 +19,7 @@
 ## 一些细节
 
 * 壁纸分辨率是 1920*1080，按每张大小 500K 计算一年大概需要 180M 存储空间
-* 可以直接访问我上传好的壁纸（带 CDN）：`https://img.hacpai.com/bing/yyyyMMdd.jpg`，起始日期是 20171104，即 https://img.hacpai.com/bing/20171104.jpg
+* 可以直接访问我上传好的壁纸（带 CDN）：`https://b3logfile.com/bing/yyyyMMdd.jpg`，起始日期是 20171104，即 https://b3logfile.com/bing/20171104.jpg
 
 ## 鸣谢
 
