@@ -66,9 +66,8 @@ func picData(picURL string) (data []byte) {
 	if _, data, errs = gorequest.New().Get(picURL).Timeout(15*time.Second).
 		Retry(3, 5*time.Second, http.StatusBadRequest, http.StatusInternalServerError).
 		EndBytes(); nil != errs {
-		log.Fatal("%s", errs[0])
+		log.Fatalf("%s", errs[0])
 	}
-
 	return
 }
 
